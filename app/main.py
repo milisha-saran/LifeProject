@@ -104,9 +104,10 @@ async def database_health_check():
     """Database health check endpoint."""
     try:
         from app.core.database import get_session
+        from sqlalchemy import text
         async for session in get_session():
             # Simple query to test database connection
-            result = await session.execute("SELECT 1")
+            result = await session.execute(text("SELECT 1"))
             result.fetchone()
             return {"status": "healthy", "database": "connected"}
     except Exception as e:

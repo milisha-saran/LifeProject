@@ -13,7 +13,7 @@ from app.models.project import (
 )
 from app.models.user import User
 from app.repositories.task import TaskRepository
-from app.services.time_allocation import TimeAllocationError
+from app.core.exceptions import TimeAllocationExceeded
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
@@ -36,7 +36,7 @@ async def create_task(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(e)
         )
-    except TimeAllocationError as e:
+    except TimeAllocationExceeded as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
@@ -110,7 +110,7 @@ async def update_task(
             )
         
         return task
-    except TimeAllocationError as e:
+    except TimeAllocationExceeded as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)

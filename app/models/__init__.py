@@ -23,6 +23,11 @@ from .recurring import (
     RecurringItemBase,
 )
 from .user import User, UserCreate, UserRead, UserUpdate
+from .project import (
+    Project, ProjectCreate, ProjectRead, ProjectUpdate,
+    Goal, GoalCreate, GoalRead, GoalUpdate,
+    Task, TaskCreate, TaskRead, TaskUpdate
+)
 
 __all__ = [
     # Base models
@@ -52,4 +57,17 @@ __all__ = [
     "HabitRead",
     "HabitUpdate",
     "HabitComplete",
+    # Project models
+    "Project",
+    "ProjectCreate",
+    "ProjectRead", 
+    "ProjectUpdate",
+    "Goal",
+    "GoalCreate",
+    "GoalRead",
+    "GoalUpdate",
+    "Task",
+    "TaskCreate",
+    "TaskRead",
+    "TaskUpdate",
 ]

@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
 
 from app.models.project import Task, TaskCreate, TaskUpdate, Goal
-from app.services.time_allocation import TimeAllocationService, TimeAllocationError
+from app.services.time_allocation import TimeAllocationService
 
 
 class TaskRepository:

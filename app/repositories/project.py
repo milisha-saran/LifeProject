@@ -7,7 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
 
 from app.models.project import Project, ProjectCreate, ProjectUpdate
-from app.services.time_allocation import TimeAllocationService, TimeAllocationError
+from app.services.time_allocation import TimeAllocationService
+from app.core.exceptions import TimeAllocationExceeded
 
 
 class ProjectRepository:
@@ -83,7 +84,7 @@ class ProjectRepository:
             Updated project if found, None otherwise
             
         Raises:
-            TimeAllocationError: If hours update would violate constraints
+            TimeAllocationExceeded: If hours update would violate constraints
         """
         # Get existing project
         project = await self.get_by_id(project_id, user_id)

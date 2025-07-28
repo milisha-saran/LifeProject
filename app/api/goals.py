@@ -13,7 +13,6 @@ from app.models.project import (
 )
 from app.models.user import User
 from app.repositories.goal import GoalRepository
-from app.services.time_allocation import TimeAllocationError
 
 router = APIRouter(prefix="/goals", tags=["goals"])
 
@@ -34,11 +33,6 @@ async def create_goal(
     except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=str(e)
-        )
-    except TimeAllocationError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
         )
     except Exception as e:
@@ -110,11 +104,6 @@ async def update_goal(
             )
         
         return goal
-    except TimeAllocationError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,

@@ -18,8 +18,8 @@ class Settings(BaseSettings):
     ALLOWED_HOSTS: Union[List[str], str] = ["*"]
     
     # Database Configuration
-    DATABASE_URL: str = "postgresql://user:password@localhost/productivity_db"
-    TEST_DATABASE_URL: str = "postgresql://user:password@localhost/productivity_test_db"
+    DATABASE_URL: str
+    TEST_DATABASE_URL: str = "postgresql://milisha:helloworld@localhost/life_project_test"
     
     # Security Configuration
     SECRET_KEY: str = "your-secret-key-change-in-production"
