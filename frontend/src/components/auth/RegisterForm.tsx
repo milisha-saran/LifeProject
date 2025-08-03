@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { Eye, EyeOff, Loader2, Mail, Lock, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,7 @@ import { registerSchema, type RegisterFormData } from '@/lib/validations/auth';
 export const RegisterForm: React.FC = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const { register: registerUser, isLoading } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -25,6 +26,8 @@ export const RegisterForm: React.FC = () => {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await registerUser(data);
+      // Redirect to login page after successful registration
+      navigate({ to: '/login' });
     } catch (error) {
       // Error is handled in the AuthContext
     }

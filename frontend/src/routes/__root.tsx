@@ -38,6 +38,24 @@ function RootLayout() {
                 >
                   Dashboard
                 </Link>
+                <Link 
+                  to="/projects" 
+                  className="text-gray-600 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors [&.active]:text-brand-600 [&.active]:bg-brand-50 [&.active]:font-semibold"
+                >
+                  Projects
+                </Link>
+                <Link 
+                  to="/chores" 
+                  className="text-gray-600 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors [&.active]:text-brand-600 [&.active]:bg-brand-50 [&.active]:font-semibold"
+                >
+                  Chores
+                </Link>
+                <Link 
+                  to="/habits" 
+                  className="text-gray-600 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors [&.active]:text-brand-600 [&.active]:bg-brand-50 [&.active]:font-semibold"
+                >
+                  Habits
+                </Link>
               </nav>
             )}
           </div>

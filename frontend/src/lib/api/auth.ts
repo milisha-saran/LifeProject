@@ -1,4 +1,4 @@
-import { type AuthResponse, type LoginCredentials, type RegisterData, type User } from '@/types/auth';
+import { type AuthResponse, type LoginCredentials, type RegisterData, type User, type RegisterResponse } from '@/types/auth';
 
 const API_BASE_URL = 'http://localhost:8000';
 
@@ -20,7 +20,7 @@ export const loginUser = async (credentials: LoginCredentials): Promise<AuthResp
   return response.json();
 };
 
-export const registerUser = async (userData: RegisterData): Promise<AuthResponse> => {
+export const registerUser = async (userData: RegisterData): Promise<RegisterResponse> => {
   const response = await fetch(`${API_BASE_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

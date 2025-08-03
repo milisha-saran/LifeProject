@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -31,15 +31,35 @@ function Dashboard() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <Link to="/projects" className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-105 block">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <span className="text-white text-xl">📋</span>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Projects</h3>
               <p className="text-gray-600 mb-4">Organize and track your important projects</p>
-              <div className="text-sm text-blue-600 font-medium">Coming soon →</div>
-            </div>
+              <div className="text-sm text-blue-600 font-medium">Manage projects →</div>
+            </Link>
             
+            <Link to="/chores" className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-105 block">
+              <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <span className="text-white text-xl">🧹</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Chores</h3>
+              <p className="text-gray-600 mb-4">Manage recurring maintenance tasks</p>
+              <div className="text-sm text-orange-600 font-medium">Manage chores →</div>
+            </Link>
+            
+            <Link to="/habits" className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-105 block">
+              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <span className="text-white text-xl">✅</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Habits</h3>
+              <p className="text-gray-600 mb-4">Build and maintain healthy daily habits</p>
+              <div className="text-sm text-green-600 font-medium">Track habits →</div>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <span className="text-white text-xl">📅</span>
@@ -50,12 +70,12 @@ function Dashboard() {
             </div>
             
             <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-white text-xl">✅</span>
+              <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <span className="text-white text-xl">📊</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Habits</h3>
-              <p className="text-gray-600 mb-4">Build and maintain healthy daily habits</p>
-              <div className="text-sm text-green-600 font-medium">Coming soon →</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Analytics</h3>
+              <p className="text-gray-600 mb-4">Track your productivity and progress</p>
+              <div className="text-sm text-pink-600 font-medium">Coming soon →</div>
             </div>
           </div>
 

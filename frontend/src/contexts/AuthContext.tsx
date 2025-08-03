@@ -41,12 +41,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Login mutation
   const loginMutation = useMutation({
     mutationFn: loginUser,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       setToken(data.access_token);
-      setUser(data.user);
       localStorage.setItem(TOKEN_KEY, data.access_token);
-      queryClient.setQueryData(['currentUser'], data.user);
-      toast.success('Login successful!');
+      // Fetch user data after successful login
+      try {
+        const userData = await getCurrentUser(data.access_token);
+        setUser(userData);
+        queryClient.setQueryData(['currentUser'], userData);
+        toast.success('Login successful!');
+      } catch (error) {
+        toast.error('Failed to fetch user data');
+        logout();
+      }
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -56,12 +63,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Register mutation
   const registerMutation = useMutation({
     mutationFn: registerUser,
-    onSuccess: (data) => {
-      setToken(data.access_token);
-      setUser(data.user);
-      localStorage.setItem(TOKEN_KEY, data.access_token);
-      queryClient.setQueryData(['currentUser'], data.user);
-      toast.success('Registration successful!');
+    onSuccess: () => {
+      // Registration returns user data directly, but we need to login to get token
+      toast.success('Registration successful! Please log in.');
+      // Note: We could auto-login here, but for security it's better to require explicit login
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -73,9 +78,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     mutationFn: () => refreshToken(token!),
     onSuccess: (data) => {
       setToken(data.access_token);
-      setUser(data.user);
       localStorage.setItem(TOKEN_KEY, data.access_token);
-      queryClient.setQueryData(['currentUser'], data.user);
+      // User data should remain the same, no need to refetch
     },
     onError: () => {
       // If refresh fails, logout user

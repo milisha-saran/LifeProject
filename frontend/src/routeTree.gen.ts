@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as HabitsRouteImport } from './routes/habits'
+import { Route as ChoresRouteImport } from './routes/chores'
 import { Route as IndexRouteImport } from './routes/index'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -18,9 +21,24 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HabitsRoute = HabitsRouteImport.update({
+  id: '/habits',
+  path: '/habits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChoresRoute = ChoresRouteImport.update({
+  id: '/chores',
+  path: '/chores',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,31 +49,50 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chores': typeof ChoresRoute
+  '/habits': typeof HabitsRoute
   '/login': typeof LoginRoute
+  '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chores': typeof ChoresRoute
+  '/habits': typeof HabitsRoute
   '/login': typeof LoginRoute
+  '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/chores': typeof ChoresRoute
+  '/habits': typeof HabitsRoute
   '/login': typeof LoginRoute
+  '/projects': typeof ProjectsRoute
   '/register': typeof RegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register'
+  fullPaths: '/' | '/chores' | '/habits' | '/login' | '/projects' | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register'
-  id: '__root__' | '/' | '/login' | '/register'
+  to: '/' | '/chores' | '/habits' | '/login' | '/projects' | '/register'
+  id:
+    | '__root__'
+    | '/'
+    | '/chores'
+    | '/habits'
+    | '/login'
+    | '/projects'
+    | '/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChoresRoute: typeof ChoresRoute
+  HabitsRoute: typeof HabitsRoute
   LoginRoute: typeof LoginRoute
+  ProjectsRoute: typeof ProjectsRoute
   RegisterRoute: typeof RegisterRoute
 }
 
@@ -68,11 +105,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/habits': {
+      id: '/habits'
+      path: '/habits'
+      fullPath: '/habits'
+      preLoaderRoute: typeof HabitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chores': {
+      id: '/chores'
+      path: '/chores'
+      fullPath: '/chores'
+      preLoaderRoute: typeof ChoresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,7 +145,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChoresRoute: ChoresRoute,
+  HabitsRoute: HabitsRoute,
   LoginRoute: LoginRoute,
+  ProjectsRoute: ProjectsRoute,
   RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
