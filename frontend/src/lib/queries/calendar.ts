@@ -4,8 +4,8 @@ import { fetchCalendarData, transformToCalendarEvents } from '@/lib/api/calendar
 import { updateTask } from '@/lib/api/tasks';
 import { completeChore } from '@/lib/api/chores';
 import { completeHabit } from '@/lib/api/habits';
-import { CalendarEvent, TimeSlot } from '@/types/calendar';
-import { Task } from '@/types/project';
+import type { CalendarEvent, TimeSlot } from '@/types/calendar';
+import type { Task } from '@/types/project';
 
 export const useCalendarEvents = (date: Date) => {
   return useQuery({

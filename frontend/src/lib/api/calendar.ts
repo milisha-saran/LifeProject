@@ -4,9 +4,9 @@ import { fetchTasksByGoal } from './tasks';
 import { fetchDueChores } from './chores';
 import { fetchDueHabits } from './habits';
 import { fetchGoalsByProject } from './goals';
-import { CalendarEventData, CalendarEvent } from '@/types/calendar';
-import { Task, Project, Goal } from '@/types/project';
-import { Chore, Habit } from '@/types/recurring';
+import type { CalendarEventData, CalendarEvent } from '@/types/calendar';
+import type { Task, Project, Goal } from '@/types/project';
+import type { Chore, Habit } from '@/types/recurring';
 
 export const fetchCalendarData = async (date: Date): Promise<CalendarEventData> => {
   const dateString = format(date, 'yyyy-MM-dd');

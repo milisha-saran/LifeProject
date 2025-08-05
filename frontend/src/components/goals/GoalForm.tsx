@@ -43,7 +43,10 @@ import { validateGoalHours } from '@/lib/utils/timeAllocation'
 const goalSchema = z.object({
   name: z.string().min(1, 'Goal name is required'),
   description: z.string().optional(),
-  weekly_hours: z.number().min(0.5, 'Must allocate at least 0.5 hours').max(168, 'Cannot exceed 168 hours per week'),
+  weekly_hours: z
+    .number()
+    .min(0.5, 'Must allocate at least 0.5 hours')
+    .max(168, 'Cannot exceed 168 hours per week'),
   start_date: z.date(),
   end_date: z.date().optional(),
   status: z.enum(['Not Started', 'In Progress', 'Completed']),
@@ -94,7 +97,7 @@ export function GoalForm({
 
   const handleSubmit = async (data: GoalFormData) => {
     setValidationError('')
-    
+
     // Final validation before submission
     const validation = validateGoalHours(
       project,
@@ -102,7 +105,7 @@ export function GoalForm({
       data.weekly_hours,
       goal?.id
     )
-    
+
     if (!validation.isValid) {
       setValidationError(validation.error || 'Invalid hours allocation')
       return
@@ -113,7 +116,9 @@ export function GoalForm({
       form.reset()
       onOpenChange(false)
     } catch (error) {
-      setValidationError(error instanceof Error ? error.message : 'Failed to save goal')
+      setValidationError(
+        error instanceof Error ? error.message : 'Failed to save goal'
+      )
     }
   }
 
@@ -121,19 +126,19 @@ export function GoalForm({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>
-            {goal ? 'Edit Goal' : 'Create New Goal'}
-          </DialogTitle>
+          <DialogTitle>{goal ? 'Edit Goal' : 'Create New Goal'}</DialogTitle>
           <DialogDescription>
-            {goal 
+            {goal
               ? 'Update the goal details below.'
-              : `Create a new goal for ${project.name}. Available hours: ${hoursValidation.remainingHours}h/week`
-            }
+              : `Create a new goal for ${project.name}. Available hours: ${hoursValidation.remainingHours}h/week`}
           </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-6"
+          >
             <FormField
               control={form.control}
               name="name"
@@ -180,7 +185,9 @@ export function GoalForm({
                       max="168"
                       placeholder="1.0"
                       {...field}
-                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      onChange={(e) =>
+                        field.onChange(parseFloat(e.target.value) || 0)
+                      }
                     />
                   </FormControl>
                   {!hoursValidation.isValid && (
@@ -220,15 +227,23 @@ export function GoalForm({
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
+                      <PopoverContent
+                        className="w-auto p-0 bg-white border-gray-200 shadow-lg z-[100]"
+                        align="start"
+                      >
                         <Calendar
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
                           disabled={(date) => {
                             const projectStart = new Date(project.start_date)
-                            const projectEnd = project.end_date ? new Date(project.end_date) : null
-                            return date < projectStart || (projectEnd && date > projectEnd)
+                            const projectEnd = project.end_date
+                              ? new Date(project.end_date)
+                              : null
+                            return (
+                              date < projectStart ||
+                              (projectEnd && date > projectEnd)
+                            )
                           }}
                           initialFocus
                         />
@@ -264,15 +279,23 @@ export function GoalForm({
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
+                      <PopoverContent
+                        className="w-auto p-0 bg-white border-gray-200 shadow-lg z-[100]"
+                        align="start"
+                      >
                         <Calendar
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
                           disabled={(date) => {
                             const startDate = form.getValues('start_date')
-                            const projectEnd = project.end_date ? new Date(project.end_date) : null
-                            return (startDate && date < startDate) || (projectEnd && date > projectEnd)
+                            const projectEnd = project.end_date
+                              ? new Date(project.end_date)
+                              : null
+                            return (
+                              (startDate && date < startDate) ||
+                              (projectEnd && date > projectEnd)
+                            )
                           }}
                           initialFocus
                         />
@@ -290,13 +313,16 @@ export function GoalForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Status</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select status" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
                       <SelectItem value="Not Started">Not Started</SelectItem>
                       <SelectItem value="In Progress">In Progress</SelectItem>
                       <SelectItem value="Completed">Completed</SelectItem>

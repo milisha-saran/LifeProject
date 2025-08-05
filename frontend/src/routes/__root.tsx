@@ -56,6 +56,12 @@ function RootLayout() {
                 >
                   Habits
                 </Link>
+                <Link 
+                  to="/calendar" 
+                  className="text-gray-600 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors [&.active]:text-brand-600 [&.active]:bg-brand-50 [&.active]:font-semibold"
+                >
+                  Calendar
+                </Link>
               </nav>
             )}
           </div>

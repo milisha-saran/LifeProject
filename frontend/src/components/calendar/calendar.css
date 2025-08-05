@@ -1,0 +1,170 @@
+/* Calendar container styles */
+.calendar-container {
+  height: 100%;
+  font-family: inherit;
+}
+
+/* Override react-big-calendar styles */
+.rbc-calendar {
+  height: 100%;
+}
+
+.rbc-time-view {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.rbc-time-header {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rbc-time-content {
+  border-top: none;
+}
+
+.rbc-timeslot-group {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.rbc-time-slot {
+  border-top: 1px solid #f9fafb;
+}
+
+.rbc-time-gutter .rbc-timeslot-group {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rbc-time-gutter .rbc-time-slot {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* Event styles */
+.rbc-event {
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rbc-event:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rbc-event.rbc-selected {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* Event content */
+.rbc-event-content {
+  font-weight: 500;
+}
+
+/* Drag and drop styles */
+.rbc-addons-dnd .rbc-event {
+  cursor: move;
+}
+
+.rbc-addons-dnd .rbc-event:hover {
+  cursor: move;
+}
+
+.rbc-addons-dnd-drag-preview {
+  opacity: 0.7;
+  transform: rotate(5deg);
+}
+
+.rbc-addons-dnd-over {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Time gutter */
+.rbc-time-gutter {
+  background-color: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+}
+
+/* Header styles */
+.rbc-header {
+  padding: 8px 12px;
+  font-weight: 600;
+  color: #374151;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Today highlighting */
+.rbc-today {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Selection styles */
+.rbc-slot-selection {
+  background-color: rgba(59, 130, 246, 0.2);
+  border: 1px solid #3b82f6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rbc-time-gutter {
+    width: 60px;
+  }
+  
+  .rbc-time-gutter .rbc-time-slot {
+    font-size: 10px;
+  }
+  
+  .rbc-event {
+    font-size: 11px;
+    padding: 1px 2px;
+  }
+}
+
+/* Custom event type styles */
+.calendar-event-task {
+  border-left: 3px solid currentColor;
+}
+
+.calendar-event-chore {
+  border-left: 3px solid #10b981;
+}
+
+.calendar-event-habit {
+  border-left: 3px solid #8b5cf6;
+}
+
+/* Loading state */
+.calendar-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Popover styles */
+.calendar-popover {
+  position: fixed;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  min-width: 200px;
+}
+
+.calendar-popover-arrow {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-bottom: none;
+  border-right: none;
+  transform: translateX(-50%) rotate(45deg);
+}

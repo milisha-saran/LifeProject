@@ -1,15 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { Calendar as BigCalendar, momentLocalizer, View, Views } from 'react-big-calendar';
+import { Calendar as BigCalendar, momentLocalizer, type View, Views } from 'react-big-calendar';
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import moment from 'moment';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { CalendarEvent, TimeSlot } from '@/types/calendar';
+import type { CalendarEvent, TimeSlot } from '@/types/calendar';
 import { CalendarEventComponent } from './CalendarEventComponent';
 import { EventPopover } from './EventPopover';
 import { CalendarToolbar } from './CalendarToolbar';
 import { CreateEventDialog } from './CreateEventDialog';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import './calendar.css';
+
+const DnDCalendar = withDragAndDrop(BigCalendar);
 
 const localizer = momentLocalizer(moment);
 
@@ -54,6 +56,8 @@ export const Calendar: React.FC<CalendarProps> = ({
     setCreateTimeSlot({ start, end });
     setShowCreateDialog(true);
   }, []);
+
+
 
   const handleEventDrop = useCallback(
     ({ event, start, end }: { event: CalendarEvent; start: Date; end: Date }) => {
@@ -113,76 +117,73 @@ export const Calendar: React.FC<CalendarProps> = ({
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" role="status" aria-label="Loading calendar"></div>
       </div>
     );
   }
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="h-full flex flex-col">
-        <CalendarToolbar
+    <div className="h-full flex flex-col">
+      <CalendarToolbar
+        date={date}
+        view={view}
+        onDateChange={onDateChange}
+        onViewChange={setView}
+      />
+      
+      <div className="flex-1 min-h-0">
+        <DnDCalendar
+          localizer={localizer}
+          events={events}
           date={date}
           view={view}
-          onDateChange={onDateChange}
-          onViewChange={setView}
+          onView={setView}
+          onNavigate={onDateChange}
+          onSelectEvent={handleSelectEvent}
+          onSelectSlot={handleSelectSlot}
+          onEventDrop={handleEventDrop}
+          onEventResize={handleEventResize}
+          eventPropGetter={eventStyleGetter}
+          components={{
+            event: CalendarEventComponent,
+          }}
+          selectable
+          resizable
+          step={15}
+          timeslots={4}
+          min={new Date(2024, 0, 1, 6, 0)} // 6 AM
+          max={new Date(2024, 0, 1, 23, 0)} // 11 PM
+          defaultView={Views.DAY}
+          views={[Views.DAY, Views.WEEK]}
+          formats={{
+            timeGutterFormat: 'HH:mm',
+            eventTimeRangeFormat: ({ start, end }) =>
+              `${moment(start).format('HH:mm')} - ${moment(end).format('HH:mm')}`,
+          }}
+          className="calendar-container"
         />
-        
-        <div className="flex-1 min-h-0">
-          <BigCalendar
-            localizer={localizer}
-            events={events}
-            date={date}
-            view={view}
-            onView={setView}
-            onNavigate={onDateChange}
-            onSelectEvent={handleSelectEvent}
-            onSelectSlot={handleSelectSlot}
-            onEventDrop={handleEventDrop}
-            onEventResize={handleEventResize}
-            eventPropGetter={eventStyleGetter}
-            components={{
-              event: CalendarEventComponent,
-            }}
-            selectable
-            resizable
-            dragFromOutsideItem={null}
-            step={15}
-            timeslots={4}
-            min={new Date(2024, 0, 1, 6, 0)} // 6 AM
-            max={new Date(2024, 0, 1, 23, 0)} // 11 PM
-            defaultView={Views.DAY}
-            views={[Views.DAY, Views.WEEK]}
-            formats={{
-              timeGutterFormat: 'HH:mm',
-              eventTimeRangeFormat: ({ start, end }) =>
-                `${moment(start).format('HH:mm')} - ${moment(end).format('HH:mm')}`,
-            }}
-            className="calendar-container"
-          />
-        </div>
-
-        {selectedEvent && popoverPosition && (
-          <EventPopover
-            event={selectedEvent}
-            position={popoverPosition}
-            onEdit={handleEventEdit}
-            onComplete={handleEventComplete}
-            onDelete={handleEventDelete}
-            onClose={closePopover}
-          />
-        )}
-
-        {showCreateDialog && createTimeSlot && (
-          <CreateEventDialog
-            timeSlot={createTimeSlot}
-            onClose={() => {
-              setShowCreateDialog(false);
-              setCreateTimeSlot(null);
-            }}
-          />
-        )}
       </div>
-    </DndProvider>
+
+      {selectedEvent && popoverPosition && (
+        <EventPopover
+          event={selectedEvent}
+          position={popoverPosition}
+          onEdit={handleEventEdit}
+          onComplete={handleEventComplete}
+          onDelete={handleEventDelete}
+          onClose={closePopover}
+        />
+      )}
+
+      {showCreateDialog && createTimeSlot && (
+        <CreateEventDialog
+          timeSlot={createTimeSlot}
+          onClose={() => {
+            setShowCreateDialog(false);
+            setCreateTimeSlot(null);
+          }}
+        />
+      )}
+    </div>
   );
 };

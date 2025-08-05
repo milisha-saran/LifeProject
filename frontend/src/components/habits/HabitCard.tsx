@@ -100,7 +100,7 @@ export function HabitCard({ habit, onEdit, onDelete, onComplete, isCompleting }:
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-40 p-1" align="end">
+              <PopoverContent className="w-40 p-1 bg-white border-gray-200 shadow-lg z-[100]" align="end">
                 <Button
                   variant="ghost"
                   size="sm"

@@ -14,6 +14,7 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HabitsRouteImport } from './routes/habits'
 import { Route as ChoresRouteImport } from './routes/chores'
+import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as IndexRouteImport } from './routes/index'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -41,6 +42,11 @@ const ChoresRoute = ChoresRouteImport.update({
   path: '/chores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/calendar': typeof CalendarRoute
   '/chores': typeof ChoresRoute
   '/habits': typeof HabitsRoute
   '/login': typeof LoginRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/calendar': typeof CalendarRoute
   '/chores': typeof ChoresRoute
   '/habits': typeof HabitsRoute
   '/login': typeof LoginRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/calendar': typeof CalendarRoute
   '/chores': typeof ChoresRoute
   '/habits': typeof HabitsRoute
   '/login': typeof LoginRoute
@@ -74,12 +83,27 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chores' | '/habits' | '/login' | '/projects' | '/register'
+  fullPaths:
+    | '/'
+    | '/calendar'
+    | '/chores'
+    | '/habits'
+    | '/login'
+    | '/projects'
+    | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chores' | '/habits' | '/login' | '/projects' | '/register'
+  to:
+    | '/'
+    | '/calendar'
+    | '/chores'
+    | '/habits'
+    | '/login'
+    | '/projects'
+    | '/register'
   id:
     | '__root__'
     | '/'
+    | '/calendar'
     | '/chores'
     | '/habits'
     | '/login'
@@ -89,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CalendarRoute: typeof CalendarRoute
   ChoresRoute: typeof ChoresRoute
   HabitsRoute: typeof HabitsRoute
   LoginRoute: typeof LoginRoute
@@ -133,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChoresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -145,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CalendarRoute: CalendarRoute,
   ChoresRoute: ChoresRoute,
   HabitsRoute: HabitsRoute,
   LoginRoute: LoginRoute,

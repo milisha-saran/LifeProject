@@ -265,7 +265,7 @@ export function TaskForm({
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
+                      <PopoverContent className="w-auto p-0 bg-white border-gray-200 shadow-lg z-[100]" align="start">
                         <Calendar
                           mode="single"
                           selected={field.value}
@@ -277,7 +277,7 @@ export function TaskForm({
                           }}
                           initialFocus
                         />
-                        <div className="p-3 border-t">
+                        {/* <div className="p-3 border-t">
                           <Input
                             type="time"
                             value={field.value ? format(field.value, 'HH:mm') : ''}
@@ -290,7 +290,7 @@ export function TaskForm({
                               }
                             }}
                           />
-                        </div>
+                        </div> */}
                       </PopoverContent>
                     </Popover>
                     <FormMessage />
@@ -323,7 +323,7 @@ export function TaskForm({
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
+                      <PopoverContent className="w-auto p-0 bg-white border-gray-200 shadow-lg z-[100]" align="start">
                         <Calendar
                           mode="single"
                           selected={field.value}
@@ -374,7 +374,7 @@ export function TaskForm({
                         <SelectValue placeholder="Select status" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
                       <SelectItem value="Not Started">Not Started</SelectItem>
                       <SelectItem value="In Progress">In Progress</SelectItem>
                       <SelectItem value="Completed">Completed</SelectItem>

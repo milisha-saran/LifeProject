@@ -208,7 +208,7 @@ export function HabitList({
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Due date" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
             <SelectItem value="all">All</SelectItem>
             <SelectItem value="overdue">Overdue</SelectItem>
             <SelectItem value="due-today">Due Today</SelectItem>
@@ -221,7 +221,7 @@ export function HabitList({
           <SelectTrigger className="w-[130px]">
             <SelectValue placeholder="Streak" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
             <SelectItem value="all">All Streaks</SelectItem>
             <SelectItem value="active">Active</SelectItem>
             <SelectItem value="broken">Broken</SelectItem>
@@ -233,7 +233,7 @@ export function HabitList({
           <SelectTrigger className="w-[130px]">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
             <SelectItem value="all">All Status</SelectItem>
             <SelectItem value="Not Started">Not Started</SelectItem>
             <SelectItem value="In Progress">In Progress</SelectItem>
@@ -245,7 +245,7 @@ export function HabitList({
           <SelectTrigger className="w-[130px]">
             <SelectValue placeholder="Frequency" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
             <SelectItem value="all">All Frequencies</SelectItem>
             <SelectItem value="daily">Daily</SelectItem>
             <SelectItem value="weekly">Weekly</SelectItem>

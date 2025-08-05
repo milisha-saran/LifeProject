@@ -144,7 +144,7 @@ export function HabitForm({ habit, open, onOpenChange, onSubmit, isLoading }: Ha
                 <SelectTrigger>
                   <SelectValue placeholder="Select frequency" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
                   {FREQUENCY_OPTIONS.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}
@@ -182,7 +182,7 @@ export function HabitForm({ habit, open, onOpenChange, onSubmit, isLoading }: Ha
                 <SelectTrigger>
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white border-gray-200 shadow-lg z-[100]">
                   {STATUS_OPTIONS.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}
@@ -207,7 +207,7 @@ export function HabitForm({ habit, open, onOpenChange, onSubmit, isLoading }: Ha
                     {watchedDueDate ? format(watchedDueDate, 'PPP') : 'Pick a date'}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
+                <PopoverContent className="w-80 p-0 bg-white border-gray-200 shadow-lg z-[100]">
                   <Calendar
                     mode="single"
                     selected={watchedDueDate}
@@ -256,7 +256,7 @@ export function HabitForm({ habit, open, onOpenChange, onSubmit, isLoading }: Ha
                     {watchedStartTime ? format(watchedStartTime, 'PPP p') : 'Pick start time'}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
+                <PopoverContent className="w-auto p-0 bg-white border-gray-200 shadow-lg z-[100]">
                   <Calendar
                     mode="single"
                     selected={watchedStartTime}
@@ -287,7 +287,7 @@ export function HabitForm({ habit, open, onOpenChange, onSubmit, isLoading }: Ha
                     {watchedEndTime ? format(watchedEndTime, 'PPP p') : 'Pick end time'}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
+                <PopoverContent className="w-auto p-0 bg-white border-gray-200 shadow-lg z-[100]">
                   <Calendar
                     mode="single"
                     selected={watchedEndTime}
